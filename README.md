@@ -1,6 +1,7 @@
 # Mousehunt discord info bot
-Displaying of information of many often referenced things in mousehunt.
-This bot is made for practice purposes as such will not often be updated.
+Displaying of information of many often referenced things in mousehunt.<br/>
+This bot is made for practice purposes as such will not often be updated.<br/>
+Main objective of creating a chat bot for the first time and getting used to github.
 
 ## Pre-requisites
 1. Go to discord's [developer portal](https://discordapp.com/developers/applications)
