@@ -17,8 +17,8 @@ Main objective of creating a chat bot for the first time and getting used to git
 9. Select the server where you wish to place the bot in and Authorize.
 
 ## To run the backend of the bot.
-1. Go to [setup.json](./setup.json) file and replace the text to enter token with the token that you kept in step 5 of pre-requisites.
-2. Run the python script using [mhdiscordbot.py](./mhdiscordbot.py) as the starting point.
+1. Run the python script using [mhdiscordbot.py](./mhdiscordbot.py) as the starting point.
+2. Enter token when prompted or as commandline argument when running script from terminal
 
 ## All features
 | No. | Command | Description |
@@ -28,5 +28,6 @@ Main objective of creating a chat bot for the first time and getting used to git
 | 3 | `....aboutprestigebase` | Display floors where prestige base<br>starts to match other popular base |
 | 4 | `....vriftfloorcache` | Displays floor cache of<br>particular floor |
 
-## Other details
+## Credits, references and other details
 - Change Log: [Here](./changelog.md)
+- discord api: [Here](https://discordpy.readthedocs.io/en/latest/api.html)

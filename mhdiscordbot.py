@@ -1,6 +1,6 @@
 import os
+import sys
 import discord
-import json
 from constants import *
 from Commands import *
 
@@ -38,25 +38,31 @@ class MyClient(discord.Client):
 
             await message.channel.send(reply)
 
-def get_setup_data():
-    data = {}
-
-    with open(SETUPFILENAME) as json_file:
-        data = json.load(json_file)
-    
-    return data
 
 # Check if main script
 if __name__ == '__main__':
-    print("Starting discord bot practice program")
-    print("-------------------------------------")
-    print("Start Up Sequence Initiated")
-    print("Retrieving setup information")
+    try:
+        print("Starting discord bot practice program")
+        print("-------------------------------------")
+        print("Start Up Sequence Initiated")
+        print("Retrieving setup information")
 
-    data = get_setup_data()
+        client = MyClient()
 
-    client = MyClient()
-    client.run(data[DISCORDTOKEN])
+        token = ""
+        # Check if any arguments provided
+        if len(sys.argv) > 1:
+            token = sys.argv[1]
+        else:
+            token = input("Enter discord token:\n")
+
+        try:
+            client.run(token)
+        except discord.errors.LoginFailure as e:
+            print("Login unsuccessful: {0}".format(e))
+
+    except KeyboardInterrupt:
+        print("Kill Program")
 
     # windows terminal will return nt
     # mac and linux terminals will return posix
