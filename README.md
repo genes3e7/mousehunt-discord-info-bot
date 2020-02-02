@@ -28,5 +28,6 @@ Main objective of creating a chat bot for the first time and getting used to git
 | 3 | `....aboutprestigebase` | Display floors where prestige base<br>starts to match other popular base |
 | 4 | `....vriftfloorcache` | Displays floor cache of<br>particular floor |
 
-## Other details
+## Credits, references and other details
 - Change Log: [Here](./changelog.md)
+- discord api: [Here](https://discordpy.readthedocs.io/en/latest/api.html)
