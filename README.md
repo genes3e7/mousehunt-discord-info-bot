@@ -1,5 +1,6 @@
 # Mousehunt discord info bot
-Displaying of information 
+Displaying of information of many often referenced things in mousehunt.
+This bot is made for practice purposes as such will not often be updated.
 
 ## Pre-requisites
 1. Go to discord's [developer portal](https://discordapp.com/developers/applications)
