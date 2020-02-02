@@ -1,7 +1,7 @@
 import csv
 
 KIV = "Feature under construction\nTry again later"
-CACHEDATA = "vrift/vriftCache.csv"
+CACHEDATA = "vrift/vriftcache.csv"
 
 
 class FragCoreCount:
