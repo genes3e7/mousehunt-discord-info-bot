@@ -1,5 +1,10 @@
 # Change Log
 
+## v1.0.2 = 020220
+Changed method of entering token.<br/>
+1. Requesting user to enter into the terminal directly
+2. at program start as command line arguments
+
 ## v1.0.1 - 020220
 Initial Commit<br/>
 
