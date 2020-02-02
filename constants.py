@@ -1,6 +1,7 @@
 import discord
 
 DISCORDTOKEN = "DISCORDTOKEN"
+SETUPFILENAME = "setup.json"
 STATUS = discord.Status.online
 GAMENAME = "MouseHunt"
 
