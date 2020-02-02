@@ -31,3 +31,11 @@ Main objective of creating a chat bot for the first time and getting used to git
 ## Credits, references and other details
 - Change Log: [Here](./changelog.md)
 - discord api: [Here](https://discordpy.readthedocs.io/en/latest/api.html)
+- python discord dependency: [Documentation](https://pypi.org/project/discord.py/)
+```
+# Linux/macOS
+python3 -m pip install -U discord.py
+
+# Windows
+py -3 -m pip install -U discord.py
+```
