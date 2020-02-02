@@ -3,7 +3,7 @@
 ## v1.0.1 - 020220
 Initial Commit<br/>
 
-- Features implemented
+- Features implemented<br/>
 | No. | Command | Description |
 |:---:|:-----------------------:|:------------------------------------------------------------------------:|
 | 1 | `....prestigestats` | Checking prestige base stats |
