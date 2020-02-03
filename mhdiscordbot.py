@@ -3,6 +3,7 @@ import sys
 import discord
 from constants import *
 from Commands import *
+from settings import DISCORD_TOKEN
 
 
 class MyClient(discord.Client):
@@ -49,15 +50,8 @@ if __name__ == '__main__':
 
         client = MyClient()
 
-        token = ""
-        # Check if any arguments provided
-        if len(sys.argv) > 1:
-            token = sys.argv[1]
-        else:
-            token = input("Enter discord token:\n")
-
         try:
-            client.run(token)
+            client.run(DISCORD_TOKEN)
         except discord.errors.LoginFailure as e:
             print("Login unsuccessful: {0}".format(e))
 

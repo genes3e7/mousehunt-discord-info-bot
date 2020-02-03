@@ -17,8 +17,13 @@ Main objective of creating a chat bot for the first time and getting used to git
 9. Select the server where you wish to place the bot in and Authorize.
 
 ## To run the backend of the bot.
-1. Run the python script using [mhdiscordbot.py](./mhdiscordbot.py) as the starting point.
-2. Enter token when prompted or as commandline argument when running script from terminal
+1. Create a `.env` file in the root folder of the package
+```
+# .env
+DISCORD_TOKEN="INSERT TOKEN HERE"
+```
+2. Replace the placeholder with your discord token
+3. Run the python script using [mhdiscordbot.py](./mhdiscordbot.py) as the starting point.
 
 ## All features
 | No. | Command | Description |
@@ -31,11 +36,19 @@ Main objective of creating a chat bot for the first time and getting used to git
 ## Credits, references and other details
 - Change Log: [Here](./changelog.md)
 - discord api: [Here](https://discordpy.readthedocs.io/en/latest/api.html)
-- python discord dependency: [Documentation](https://pypi.org/project/discord.py/)
+- python discord dependency: [pypi page](https://pypi.org/project/discord.py/)
 ```
 # Linux/macOS
 python3 -m pip install -U discord.py
 
 # Windows
 py -3 -m pip install -U discord.py
+```
+- dotenv package: [pypi page](https://pypi.org/project/python-dotenv/)
+```
+# Linux/macOS
+python3 -m pip install -U python-dotenv
+
+# Windows
+py -3 -m pip install -U python-dotenv
 ```
