@@ -6,82 +6,65 @@ CACHEDATA = "vrift/vriftcache.csv"
 
 class FragCoreCount:
     def __init__(self, floor):
-        self.divider = "-" * 51 + "\n"
         self.floor = int(floor)
-        if floor < 1:
+        if self.floor < 1:
             raise ValueError
 
-    def floordiv(self, floor):
-        return floor//8
+        self.eclipse = self.floor // 8
+        self.eclipse_floor = self.floor % 8 == 0
+        self.current_total = 0
+        for i in range(self.eclipse):
+            self.current_total += self.eclipse_frag(i + 1)
 
-    def floorMod(self, floor):
-        return floor % 8
-
-    def currFrag(self, floor):
-        if (self.floordiv(floor) == 0):
+    def eclipse_frag(self, eclipse):
+        if eclipse == 0:
             return 0
-        if (self.floordiv(floor) == 1):
-            return 1
-        return 1 + 2 * (self.floordiv(floor) - 1)
+        return 1 + 2 * (eclipse - 1)
 
-    def cummFrag(self, floor):
-        total = 0
-        if (self.floordiv != 0):
-            for i in range(1, self.floordiv(floor) + 1):
-                total = total + self.currFrag(i * 8) + 1
-        return total
+    def stats(self, floor, is_next_floor):
+        floor_fragcore = self.eclipse_frag(self.eclipse)
+        total_fragcore = self.current_total
+        total_fragcore_fire = self.current_total + self.eclipse
+        if is_next_floor:
+            floor_fragcore = self.eclipse_frag(self.eclipse + 1)
+            total_fragcore += floor_fragcore
+            total_fragcore_fire += floor_fragcore + 1
 
-    def cummFragFire(self, floor):
-        total = 0
-        if (self.floordiv(floor) != 0):
-            for i in range(1, self.floordiv(floor) + 1):
-                total = total + self.currFrag(i * 8) + 1
-        return total
-
-    def stats(self, floor):
         msg = ""
         msg += "Frag/Core drop for {0} floor:{1:>22}\n".format(
-            self.floordiv(floor) * 8,
-            "{0} frag/core".format(self.currFrag(floor))
+            floor, "{0} frag/core".format(floor_fragcore)
         )
         msg += "Frag/Core drop total till {0} floor:{1:>15}\n".format(
-            self.floor,
-            "{0} frag/core".format(self.cummFrag(floor))
+            floor, "{0} frag/core".format(total_fragcore)
         )
-
-        currFragFire = self.currFrag(floor)
-
-        if currFragFire != 0:
-            currFragFire += 1
 
         msg += "\nWith fire\n"
         msg += "Frag/Core drop for {0} floor:{1:>22}\n".format(
-            self.floordiv(floor) * 8,
-            "{0} frag/core".format(currFragFire)
+            floor, "{0} frag/core".format(
+                floor_fragcore if floor_fragcore == 0 else floor_fragcore + 1
+            )
         )
         msg += "Frag/Core drop total till {0} floor:{1:>15}\n".format(
-            self.floor,
-            "{0} frag/core".format(self.cummFragFire(floor))
+            floor, "{0} frag/core".format(total_fragcore_fire)
         )
         return msg
 
     def toString(self):
+        divider = "-" * 51 + "\n"
+        floor = self.eclipse * 8
+
         msg = "Current floor: {0}\n".format(self.floor)
-        floor = self.floor
-        if not(self.floorMod(floor) == 0):
+        if not self.eclipse_floor:
             msg += "Floor not divisible by 8\n"
-            msg += self.divider
-            msg += "Prev floor with frag/core: {0}\n".format(
-                self.floordiv(floor) * 8)
+            msg += divider
+            msg += "Prev floor with frag/core: {0}\n".format(floor)
 
-        msg += self.stats(floor)
+        msg += self.stats(floor, False)
 
-        if not(self.floorMod(floor) == 0):
-            msg += self.divider
-            self.floor = (self.floordiv(floor) + 1) * 8
-            msg += "Next floor with frag/core: {0}\n".format(
-                self.floordiv(floor) * 8)
-            msg += self.stats(floor)
+        if not self.eclipse_floor:
+            msg += divider
+            msg += "Next floor with frag/core: {0}\n".format(floor + 8)
+            msg += self.stats(floor + 8, True)
 
         return msg
 
@@ -173,9 +156,7 @@ def vriftFragCore(string, trigger, key):
         idx = string.find("{0}{1}".format(trigger, key)) + \
             len(trigger) + len(key) + 1
 
-        floor = int(string[idx:])
-        if floor < 1:
-            raise ValueError
+        floor = string[idx:]
 
         msg = "```\n{0}\n```".format(FragCoreCount(floor).toString())
 
