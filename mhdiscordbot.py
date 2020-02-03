@@ -19,14 +19,16 @@ class MyClient(discord.Client):
         print("Loading bot commands...")
         print()
         print("The bot is ready!")
+        print(DIVIDER)
 
     async def on_message(self, message):
-        print('Message from {0.author}:\n{0.content}\n'.format(message))
+        print('Message from {0.author}:\n{0.content}'.format(message))
 
         # Prevents talking to self from taking place
         if message.author == client.user:
-            print("Message ignored")
+            print("<MESSAGE IGNORED>\n")
             return
+        print()
 
         reply = self.cmd.command(message.content)
 
@@ -44,7 +46,7 @@ class MyClient(discord.Client):
 if __name__ == '__main__':
     try:
         print("Starting discord bot practice program")
-        print("-------------------------------------")
+        print(DIVIDER)
         print("Start Up Sequence Initiated")
         print("Retrieving setup information")
 
