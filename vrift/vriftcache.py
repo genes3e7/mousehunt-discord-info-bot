@@ -1,7 +1,7 @@
 import csv
 
 KIV = "Feature under construction\nTry again later"
-CACHEDATA = "vrift/vriftCache.csv"
+CACHEDATA = "vrift/vriftcache.csv"
 
 
 class FragCoreCount:
@@ -95,8 +95,6 @@ def vriftcache(string, trigger, key):
         if floor < 1:
             raise ValueError
 
-        print("Val: {0} {1}\n".format(floor, type(floor)))
-
         floorData = {}
 
         with open(CACHEDATA, mode='r') as csv_file:
@@ -110,9 +108,6 @@ def vriftcache(string, trigger, key):
                 if line_count == floor or line_count == 200:
                     floorData = row
                     break
-
-        print("\nTEST!!!")
-        print("{0}\n".format(floorData.keys()))
 
         fieldName = []
         values = []
@@ -181,8 +176,6 @@ def vriftFragCore(string, trigger, key):
         floor = int(string[idx:])
         if floor < 1:
             raise ValueError
-
-        print("Val: {0} {1}\n".format(floor, type(floor)))
 
         msg = "```\n{0}\n```".format(FragCoreCount(floor).toString())
 

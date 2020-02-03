@@ -1,6 +1,12 @@
 # Change Log
 
-## v1.0.2 = 020220
+## v1.0.3 - 030220
+1. Removal of test messages on backend
+2. Change method of obtaining discord token to .env file
+3. Update documentation of dependencies
+4. Fix bug causing vriftcache file not found in linux due to case sensitivity
+
+## v1.0.2 - 020220
 Changed method of entering token.<br/>
 1. Requesting user to enter into the terminal directly
 2. at program start as command line arguments
