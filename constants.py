@@ -15,6 +15,7 @@ PRESTIGESTATS = "prestigestats"
 VRIFTFRAGCORE = "vriftfragcore"
 ABOUTPRESTIGE = "aboutprestigebase"
 VRIFTFLOORCACHE = "vriftfloorcache"
+VRIFTAUGMENTATION = "vriftaugment"
 
 COMMANDLIST = [
     # Triggers help box
@@ -22,7 +23,7 @@ COMMANDLIST = [
     # Prestige base functions
     PRESTIGESTATS, ABOUTPRESTIGE,
     # Other valor rift functions
-    VRIFTFRAGCORE, VRIFTFLOORCACHE
+    VRIFTFRAGCORE, VRIFTFLOORCACHE, VRIFTAUGMENTATION
 ]
 
 # Instant triggers to stop irritating things

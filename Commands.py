@@ -2,6 +2,8 @@ import random
 from constants import *
 from vrift.prestigebase import *
 from vrift.vriftcache import *
+from vrift.vriftaugment import *
+
 
 class Commands:
     def __init__(self):
@@ -38,18 +40,21 @@ class Commands:
         # View command list
         if (TRIGGER + HELP) in string or (TRIGGER + "?") in string:
             return self.viewCommandList()
-
-        if (TRIGGER + PRESTIGESTATS) in string:
+        elif (TRIGGER + PRESTIGESTATS) in string:
+            # prestige base stats
             return prestigestats(string, TRIGGER, PRESTIGESTATS)
-
-        if (TRIGGER + ABOUTPRESTIGE) in string:
+        elif (TRIGGER + ABOUTPRESTIGE) in string:
+            # prestige base in relation to
             return aboutprestigebase()
-
-        if (TRIGGER + VRIFTFRAGCORE) in string:
+        elif (TRIGGER + VRIFTFRAGCORE) in string:
+            # frag/core count
             return vriftFragCore(string, TRIGGER, VRIFTFRAGCORE)
-
-        if (TRIGGER + VRIFTFLOORCACHE)in string:
+        elif (TRIGGER + VRIFTFLOORCACHE) in string:
+            # floor cache
             return vriftcache(string, TRIGGER, VRIFTFLOORCACHE)
+        elif (TRIGGER + VRIFTAUGMENTATION) in string:
+            # augment list
+            return vriftaugment()
 
         return ERROR
 
