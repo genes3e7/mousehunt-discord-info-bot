@@ -1,4 +1,6 @@
-def vriftaugment():
+import discord
+
+def vriftaugment(message):
     msg = "```\n"
     msg += "╔═════════════════╦════════════╦═════════════════════════════╗\n"
     msg += "║   Augmentation  ║ unlocks at ║         cost per run        ║\n"
@@ -17,4 +19,4 @@ def vriftaugment():
     msg += "╚═════════════════╩════════════╩═════════════════════════════╝"
     msg += "\n```"
 
-    return msg
+    return message.channel.send(msg)
