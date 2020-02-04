@@ -1,10 +1,16 @@
 # Change Log
 
+## v1.0.4 - 040220
+1. Improved efficiencry for vriftfragcore function
+### Bug fix
+1. Fix bug in vriftfragcore function outputing wrong floor and values.<br/>
+
 ## v1.0.3 - 030220
 1. Removal of test messages on backend
 2. Change method of obtaining discord token to .env file
 3. Update documentation of dependencies
-4. Fix bug causing vriftcache file not found in linux due to case sensitivity
+### Bug fix
+1. Fix bug causing vriftcache file not found in linux due to case sensitivity
 
 ## v1.0.2 - 020220
 Changed method of entering token.<br/>
