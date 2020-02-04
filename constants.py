@@ -11,10 +11,15 @@ TRIGGER = "...."
 HELP = "help"
 HELPSYMBOL = "?"
 
+# Everything to do with valor rift
 PRESTIGESTATS = "prestigestats"
 VRIFTFRAGCORE = "vriftfragcore"
 ABOUTPRESTIGE = "aboutprestigebase"
 VRIFTFLOORCACHE = "vriftfloorcache"
+VRIFTAUGMENTATION = "vriftaugment"
+
+# Everything to do with furoma rift
+FRIFTBATTERYTABLE = "friftbatterytable"
 
 COMMANDLIST = [
     # Triggers help box
@@ -22,7 +27,9 @@ COMMANDLIST = [
     # Prestige base functions
     PRESTIGESTATS, ABOUTPRESTIGE,
     # Other valor rift functions
-    VRIFTFRAGCORE, VRIFTFLOORCACHE
+    VRIFTFRAGCORE, VRIFTFLOORCACHE, VRIFTAUGMENTATION,
+    # Furoma rift functions
+    FRIFTBATTERYTABLE
 ]
 
 # Instant triggers to stop irritating things

@@ -15,8 +15,6 @@ class MyClient(discord.Client):
         )
         print("Setting bot status to \"{0}\".".format(STATUS))
         print("Setting bot to playing \"{0}\" game.".format(GAMENAME))
-        self.cmd = Commands()
-        print("Loading bot commands...")
         print()
         print("The bot is ready!")
         print(DIVIDER)
@@ -29,17 +27,11 @@ class MyClient(discord.Client):
             print("<MESSAGE IGNORED>\n")
             return
         print()
-
-        reply = self.cmd.command(message.content)
-
-        if reply == NOREPLY:
-            return
-        else:
-            if reply == ERROR or reply is None:
-                reply = ">>> Something went wrong.\n"
-                reply += "No generated reply returned"
-
-            await message.channel.send(reply)
+        
+        response = Commands(message).command()
+        if not(response is None):
+            print("Response triggered")
+            await response
 
 
 # Check if main script

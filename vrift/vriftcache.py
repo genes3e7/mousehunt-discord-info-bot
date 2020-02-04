@@ -1,7 +1,7 @@
+import discord
 import csv
 
-KIV = "Feature under construction\nTry again later"
-CACHEDATA = "vrift/vriftcache.csv"
+CACHEDATA = "data/vrift/vriftcache.csv"
 
 
 class FragCoreCount:
@@ -69,7 +69,8 @@ class FragCoreCount:
         return msg
 
 
-def vriftcache(string, trigger, key):
+def vriftcache(message, trigger, key):
+    string = message.content
     try:
         idx = string.find("{0}{1}".format(trigger, key)) + \
             len(trigger) + len(key) + 1
@@ -142,16 +143,17 @@ def vriftcache(string, trigger, key):
         )
         msg += "```"
 
-        return msg
+        return message.channel.send(msg)
 
     except ValueError:
         msg = "Invalid value.\n"
         msg += "Enter a positive integer >= 1 after {0}\n".format(key)
         msg += "Eg. `{0}{1} <value>`".format(trigger, key)
-        return msg
+        return message.channel.send(msg)
 
 
-def vriftFragCore(string, trigger, key):
+def vriftFragCore(message, trigger, key):
+    string = message.content
     try:
         idx = string.find("{0}{1}".format(trigger, key)) + \
             len(trigger) + len(key) + 1
@@ -160,10 +162,10 @@ def vriftFragCore(string, trigger, key):
 
         msg = "```\n{0}\n```".format(FragCoreCount(floor).toString())
 
-        return msg
+        return message.channel.send(msg)
 
     except ValueError:
         msg = "Invalid value.\n"
         msg += "Enter a positive integer >= 1 after {0}\n".format(key)
         msg += "Eg. `{0}{1} <value>`".format(trigger, key)
-        return msg
+        return message.channel.send(msg)

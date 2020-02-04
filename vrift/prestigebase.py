@@ -1,3 +1,6 @@
+import discord
+
+
 class PrestigeBase:
     def __init__(self, floor):
         self.floor = floor
@@ -85,7 +88,7 @@ class PrestigeBase:
         return string
 
 
-def aboutprestigebase():
+def aboutprestigebase(message):
     msg = "```\n"
     msg += "╔═════════════════════════════╦═══════════════════════════════════════╗\n"
     msg += "║                             ║          Prestige Base >= at          ║\n"
@@ -105,10 +108,12 @@ def aboutprestigebase():
     msg += "╚═════════════════════════════╩═══════════════════════════╩═══════════╝\n"
     msg += "```"
 
-    return msg
+    return message.channel.send(msg)
 
 
-def prestigestats(string, trigger, key):
+def prestigestats(message, trigger, key):
+    string = message.content.lower()
+
     try:
         idx = string.find("{0}{1}".format(trigger, key)) + \
             len(trigger) + len(key) + 1
@@ -128,10 +133,10 @@ def prestigestats(string, trigger, key):
         msg += "{0}\n".format(PrestigeBase(floor).toString())
         msg += "```"
 
-        return msg
+        return message.channel.send(msg)
 
     except ValueError:
         msg = "Invalid value.\n"
         msg += "Enter a positive integer >= 1 after {0}\n".format(key)
         msg += "Eg. `{0}{1} <value>`".format(trigger, key)
-        return msg
+        return message.channel.send(msg)

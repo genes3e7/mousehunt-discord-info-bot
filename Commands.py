@@ -1,76 +1,116 @@
 import random
+import discord
 from constants import *
-from vrift.prestigebase import *
 from vrift.vriftcache import *
+from vrift.prestigebase import *
+from vrift.vriftaugment import *
+from frift.batterytable import *
+
 
 class Commands:
-    def __init__(self):
+    def __init__(self, message):
         self.ls = sorted(COMMANDLIST)
+        self.message = message
+        self.string = self.message.content.lower()
 
-    def command(self, string):
-        string = string.lower()
-        testTrigger = False
+    def error(self):
+        reply = ">>> Something went wrong.\n"
+        reply += "No generated reply returned"
 
+        return reply
+
+    def check_non_trigger_keys(self):
         # instant triggers
         for i in DONOTIRRITATE:
-            if i in string:
-                return self.donotirritate(i)
+            if i in self.string:
+                return self.message.channel.send(self.donotirritate(i))
         for i in REPEAT:
-            if i in string:
-                return self.repeater(i)
+            if i in self.string:
+                return self.message.channel.send(self.repeater(i))
 
-        # Determines whether to react to string or not
-        if TRIGGER in string:
+    def command(self):
+        testTrigger = False
+
+        # Check instant triggers
+        response = self.check_non_trigger_keys()
+        if not(response is None):
+            return response
+
+        # Determines whether to react to self.string or not
+        if TRIGGER in self.string:
             # test if trigger has keywords tagged to it.
-            if (TRIGGER + '?') in string:
+            if (TRIGGER + '?') in self.string:
                 testTrigger = True
             else:
                 for i in COMMANDLIST:
-                    if (TRIGGER + i) in string:
+                    if (TRIGGER + i) in self.string:
                         testTrigger = True
         else:
-            return NOREPLY
+            return
 
         # help desk
-        if (TRIGGER in string) and (not testTrigger):
-            return self.helpDesk()
+        if (TRIGGER in self.string) and (not testTrigger):
+            return self.message.channel.send(self.helpDesk())
 
         # View command list
-        if (TRIGGER + HELP) in string or (TRIGGER + "?") in string:
-            return self.viewCommandList()
+        if (TRIGGER + HELP) in self.string or (TRIGGER + "?") in self.string:
+            return self.message.channel.send(self.viewCommandList())
 
-        if (TRIGGER + PRESTIGESTATS) in string:
-            return prestigestats(string, TRIGGER, PRESTIGESTATS)
+        # Check against vrift functions
+        response = self.vrift_fn()
+        if not(response is None):
+            return response
 
-        if (TRIGGER + ABOUTPRESTIGE) in string:
-            return aboutprestigebase()
+        # Check against frift functions
+        response = self.frift_fn()
+        if not(response is None):
+            return response
 
-        if (TRIGGER + VRIFTFRAGCORE) in string:
-            return vriftFragCore(string, TRIGGER, VRIFTFRAGCORE)
+        return self.message.channel.send(self.error())
 
-        if (TRIGGER + VRIFTFLOORCACHE)in string:
-            return vriftcache(string, TRIGGER, VRIFTFLOORCACHE)
+    def vrift_fn(self):
+        # prestige base stats
+        if (TRIGGER + PRESTIGESTATS) in self.string:
+            return prestigestats(self.message, TRIGGER, PRESTIGESTATS)
 
-        return ERROR
+        # prestige base in relation to
+        if (TRIGGER + ABOUTPRESTIGE) in self.string:
+            return aboutprestigebase(self.message)
 
-    def donotirritate(self, string):
+        # frag/core count
+        if (TRIGGER + VRIFTFRAGCORE) in self.string:
+            return vriftFragCore(self.message, TRIGGER, VRIFTFRAGCORE)
+
+        # floor cache
+        if (TRIGGER + VRIFTFLOORCACHE) in self.string:
+            return vriftcache(self.message, TRIGGER, VRIFTFLOORCACHE)
+
+        # augment list
+        if (TRIGGER + VRIFTAUGMENTATION) in self.string:
+            return vriftaugment(self.message)
+
+    def frift_fn(self):
+        if (TRIGGER + FRIFTBATTERYTABLE) in self.string:
+            return batterytable(self.message)
+
+    def donotirritate(self):
         hateReply = [
-            "No to {0}!".format(string),
-            "Stop saying {0}!".format(string),
-            "Too many {0}!".format(string)
+            "No to {0}!".format(self.string),
+            "Stop saying {0}!".format(self.string),
+            "Too many {0}!".format(self.string)
         ]
         return random.choice(hateReply).upper()
 
-    def repeater(self, string):
+    def repeater(self):
         triangle = []
         for i in range(10):
             triangle.append(
-                ("{0}".format(string.upper()) + " ") * (i + 1) + "\n")
+                ("{0}".format(self.string.upper()) + " ") * (i + 1) + "\n")
 
         repeatString = [
-            (((("{0}".format(string.upper())) + " ") * 10 + "\n") * 10),
-            (("{0}".format(string.upper()) + " ") * 10),
-            (("{0}".format(string.upper()) + "\n") * 10),
+            (((("{0}".format(self.string.upper())) + " ") * 10 + "\n") * 10),
+            (("{0}".format(self.string.upper()) + " ") * 10),
+            (("{0}".format(self.string.upper()) + "\n") * 10),
             "".join(triangle),
             "".join(triangle[::-1])
         ]
@@ -91,6 +131,6 @@ class Commands:
         msg = "List of commands:\n"
         msg += "> Place \'{0}\' before any of the keywords underneath".format(
             TRIGGER)
-        msg += "\n```\n{0}\n```".format(self.ls)
+        msg += "\n```\n{0}\n```".format(' '.join(self.ls))
 
         return msg
