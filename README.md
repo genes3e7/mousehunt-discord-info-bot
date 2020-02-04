@@ -27,11 +27,13 @@ DISCORD_TOKEN="INSERT TOKEN HERE"
 
 ## All features
 | No. | Command | Description |
-|:---:|:-----------------------:|:------------------------------------------------------------------------:|
+|:---:|:-----------------------:|:-------------------------------------------------------------------------:|
 | 1 | `....prestigestats` | Checking prestige base stats |
 | 2 | `....vriftfragcore` | Checking number of frag or core<br>in valor rift |
-| 3 | `....aboutprestigebase` | Display floors where prestige base<br>starts to match other popular base |
+| 3 | `....aboutprestigebase` | Display floors where prestige base<br>starts to match other popular bases |
 | 4 | `....vriftfloorcache` | Displays floor cache of<br>particular floor |
+| 5 | `....vriftaugment` | Displays valor rift<br>augmentation details |
+| 6 | `....friftbatterytable` | Displays furoma rift<br>battery details |
 
 ## Credits, references and other details
 - Change Log: [Here](./changelog.md)
