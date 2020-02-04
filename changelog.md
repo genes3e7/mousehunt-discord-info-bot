@@ -1,5 +1,10 @@
 # Change Log
 
+## v1.1.0 - 040220
+### New functions
+1. friftbatterytable - View details of furoma rift battery levels, repair, cost, etc.
+2. vriftaugment - View details of valor rift augmentations.
+
 ## v1.0.4 - 040220
 1. Improved efficiency for vriftfragcore function
 ### Bug fix
