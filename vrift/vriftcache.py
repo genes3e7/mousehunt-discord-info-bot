@@ -19,7 +19,10 @@ class FragCoreCount:
     def eclipse_frag(self, eclipse):
         if eclipse == 0:
             return 0
-        return 1 + 2 * (eclipse - 1)
+
+        eclipse_over_10, eclipse_under_10 = (0, eclipse) if (eclipse - 10) <= 0 else (eclipse - 10, 10)
+
+        return 1 + 2 * (eclipse_under_10 - 1) + 3 * eclipse_over_10
 
     def stats(self, floor, is_next_floor):
         floor_fragcore = self.eclipse_frag(self.eclipse)
